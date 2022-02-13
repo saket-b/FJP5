@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            background-color: black;
+        }
+        /* grouping selector */
+        p,h1,h3, h4{
+            color: white;
+        }
+        .textcolor{
+                color: chartreuse;
+        }
+        .largetext{
+            font-size: 30px;
+        }
+        
+        #unique{
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            color: yellow;
+        }
+        /* decendent selecter */
+        div p span{
+            color: turquoise;
+        }
+        /* children selector */
+        div>p>span{
+            color: tomato;
+        }
+
+        a[href="http://nados.io"]{
+            color: coral;
+        }
+
+        p[class="largetest"]{
+            color: cornflowerblue;
+        }
+    </style>
+
+</head>
+<body>
+<h1>class selector</h1>
+    <p class="textcolor">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Similique adipisci rem veniam quia, pariatur iusto corporis. Illo labore unde eligendi molestias accusamus deserunt soluta, ullam ea vitae exercitationem mollitia fugit.
+    </p>
+    <p class="largetext textcolor">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Similique adipisci rem veniam quia, pariatur iusto corporis. Illo labore unde eligendi molestias accusamus deserunt soluta, ullam ea vitae exercitationem mollitia fugit.
+    </p>
+
+    <p class="largetext" id="unique">
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Similique adipisci rem veniam quia, pariatur iusto corporis. Illo labore unde eligendi molestias accusamus deserunt soluta, ullam ea vitae exercitationem mollitia fugit.
+    </p>
+
+
+    <h1>IDS selector</h1>
+
+
+     <!-- combinators selector -->
+
+    
+<div>
+    <p><!--- decendent and child of div -->
+        <span>i am a child selector</span>
+    </p>
+</div>
+
+<div>
+    <span>
+        <p>
+            <span>i am decendent selector </span>
+        </p>
+    </span>
+</div>
+
+<!-- attribute selector -->
+
+<p class="largetest">i am atrribute </p>
+
+<a href="http://nados.io" target = "_blank">NADOS</a>
+<a href="http://google.com" target = "_blank">Google</a>
+<a href="http://netflix.com" target = "_blank">Netflix</a>
+
+
+</body>
+</html>

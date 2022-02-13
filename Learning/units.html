@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        /* html{
+            font-size: 30px;
+        } */
+        .parent{
+            font-size: 35px;
+        }
+        .box{
+            background-color: aquamarine;
+            margin: 10px;
+        }
+        .px{
+            width: 200px;
+        }
+        .vw{
+            width: 10em;
+        }
+        .em{
+            width: 10em;
+        }
+        .rem{
+            width: 10rem;
+        }
+
+        .ems li{
+            font-size: 1.5em;
+        }
+
+        .rems li{
+
+            font-size: 1.5rem;
+        }
+
+    </style>
+</head>
+<body>
+
+
+
+ <div class="main">
+    <div class="box px">I am 200px wide</div>
+    <div class="box vm">I am 10vw wide</div>
+    <div class ="parent">
+        <div class = "box em ">I am 10em wide</div>
+    </div>
+    <div class = "box rem">I am 10 rem wide</div>
+ </div>
+
+ <ul class = "rems">
+     <li>One </li>
+    <li>Two</li>
+    <li>Three
+        <ul>
+            <li>Three a</li>
+            <li>Three b
+                <ul>
+                <li>Three b a</li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+ </ul>
+
+
+ <ul class = "ems">
+    <li>One </li>
+   <li>Two</li>
+   <li>Three
+       <ul>
+           <li>Three a</li>
+           <li>Three b
+               <ul>
+               <li>Three b a</li>
+               </ul>
+           </li>
+       </ul>
+   </li>
+</ul>
+    
+</body>
+</html>
