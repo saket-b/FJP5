@@ -33,12 +33,16 @@ let capitanamerica = {
         console.log(`hello my name is ${this.firstname}`);
     }
 
-}
-
-console.log(capitanamerica.firstname);
+};
+//delete the key of object
+delete capitanamerica.firstname;
+console.log("first name   "+capitanamerica.firstname);
+//console.log(capitanamerica.firstname);
   capitanamerica.sayHi();
+  console.log("printed " +capitanamerica["friends"][0]);
 //console.log(capitanamerica.sayHi());
-//console.log(captianamerica.address.state);
+//let state = capitanamerica.address.state;
+console.log(capitanamerica.address.state);
 
 // for loop
 // in keyword in js is used to get keys from the objects.
