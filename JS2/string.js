@@ -4,6 +4,7 @@ console.table(arr);
 
 var str = "hello current coder";
 
+str[0] = 'H'; // strings are inmutable means value change nhi ho sakta 
 console.log(str);
 console.log(str.length);
 
