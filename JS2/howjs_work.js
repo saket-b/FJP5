@@ -16,3 +16,6 @@ console.log(cube(x));
 console.log(cube(10));
 
 //let num = 5;//  this is gives the error
+
+
+
