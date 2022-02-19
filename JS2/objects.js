@@ -52,3 +52,14 @@ for( let i in capitanamerica)
     //variable ke under binded value calculate.
     console.log(capitanamerica[i]);
 }
+
+function cube(num){
+
+    let res = num*num*num;
+    return res;
+}
+
+
+console.log(cube(num));
+
+let num = 5;
