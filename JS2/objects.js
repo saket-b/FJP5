@@ -53,13 +53,5 @@ for( let i in capitanamerica)
     console.log(capitanamerica[i]);
 }
 
-function cube(num){
+let x =5
 
-    let res = num*num*num;
-    return res;
-}
-
-
-console.log(cube(num));
-
-let num = 5;
