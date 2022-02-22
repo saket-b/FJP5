@@ -20,8 +20,7 @@
 
 // console.log(ans);
 
-function calculator(str, a, b)
-{
+function calculator(str, a, b){
     if( str == 'add')
     {
         return function add()
