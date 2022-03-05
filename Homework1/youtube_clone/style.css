@@ -1,0 +1,39 @@
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+*:focus{
+    outline: none;
+}
+
+body{
+    position: relative;
+    background: rgb(224, 226, 230);
+    font-family: 'roboto', sans-serif;
+}
+
+.navbar{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    background: white;
+    align-items: center;
+    padding: 2.5vw;
+}
+.toggle-btn{
+
+    
+    position: relative;
+    height: 10px;
+    width: 20px;
+    cursor: pointer;
+    background: black;
+}
+
+.toggle-btn span{
+    font: 1em sans-serif;
+}

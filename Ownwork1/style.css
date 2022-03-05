@@ -1,4 +1,7 @@
-
+* {
+    margin: 0;
+    padding: 0;
+}
 .navbar{
 
     display: flex;
@@ -15,7 +18,9 @@
     color: white;
 }
 body{
-    background-color: black;
+    background: black;
+    /* background-blend-mode: darken;
+    background-size: cover; */
 }
 
 img{
