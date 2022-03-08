@@ -13,6 +13,7 @@ var b =10;
 
 outer();
 console.log(b);
+module.exports = b;
 
 /*
 scope : 
