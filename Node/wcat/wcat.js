@@ -44,11 +44,11 @@ for( let i=0; i<fileArr.length; i++)
     let s = fs.readFileSync(fileArr[i]);
     content += s+"\n";
 }
-console.log(content);
+//console.log(content);
 
 let contentarr = content.split("\n");
 //console.log(objFiles);
-console.log(contentarr);
+//console.log(contentarr);
 
 let isSpresent = openerations.includes("-s");
 
@@ -61,7 +61,7 @@ if( isSpresent)
     }
 }
 
-console.table(contentarr);
+//console.table(contentarr);
 
 let temparr=[];
 
@@ -73,7 +73,7 @@ for(let i=0; i<contentarr.length; i++)
     }
 }
 
-console.log("after remove space ", temparr);
+//console.log("after remove space ", temparr);
 
 // starrt -b and -n implementation.
 
