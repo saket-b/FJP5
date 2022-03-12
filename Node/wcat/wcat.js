@@ -71,13 +71,15 @@ for(let i=0; i<contentarr.length; i++)
     {
         temparr.push(contentarr[i]);
     }
+
 }
 
+contentarr = temparr;
 //console.log("after remove space ", temparr);
 
 // starrt -b and -n implementation.
 
-contentarr = temparr;
+
 
 let indexof_b = openerations.indexOf("-b");
 
