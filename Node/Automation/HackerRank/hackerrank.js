@@ -1,7 +1,7 @@
 const puppeteer = require("puppeteer");
-let { email, password } = require('./secrets');
-// let email = "";
-// let password = "";
+//let { email, password } = require('./secrets');
+ let email = "";
+ let password = "";
 let { answer } = require("./codes");
 let curTab;
 let browserOpenPromise = puppeteer.launch({
@@ -193,7 +193,7 @@ function questionSolver(url, idx) {
         let submitButtonClickedPromise = curTab.click(".hr-monaco-submit");
         return submitButtonClickedPromise;
       })
-      
+
       .then(function () {
         console.log("code submitted successfully");
         resolve();
