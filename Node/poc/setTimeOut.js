@@ -44,16 +44,30 @@
 // let b = 100;
 // console.log(b);
 
-for (var i = 1; i <= 10; i++){
-    // hint: closures and scope -> wrapping
-    function outer(a) { //a=1
-        setTimeout(function () {
-            console.log(a);
-        }, 2000 * a);
-    }
+// for (var i = 1; i <= 10; i++){
+//     // hint: closures and scope -> wrapping
+//     function outer(a) { //a=1
+//         setTimeout(function () {
+//             console.log(a);
+//         }, 2000 * a);
+//     }
     
-    outer(i);
+//     outer(i);
+// }
+
+function a() {
+    let x = 100;
+    function y() {
+        return x;
+    }
+    return y;
 }
+
+let fn = a();
+let ans = fn();
+console.log(ans);
+
+var b = 1000;
 
 // for (var i = 1; i <= 10; i++) {
 //   // hint: closures and scope -> wrapping
@@ -91,18 +105,18 @@ for (var i = 1; i <= 10; i++){
 
 // fetch() api
 
-// console.log("before");
-// setTimeout(function () {
-//   console.log("time over");
-// }, 5000);
-// fetch("https://jsonplaceholder.typicode.com/todos/1")
-//   .then(function (response)
-//   {
-//     return response.json() // when a promise is returned, it creates a promise and then return it , which is obviously of fuflfilled state 
-//   })
-//   .then(function (json) {
-//     console.log(json)
-//   });
-// console.log("after");
+console.log("before");
+setTimeout(function () {
+  console.log("time over");
+}, 5000);
+fetch("https://jsonplaceholder.typicode.com/todos/1")
+  .then(function (response)
+  {
+    return response.json() // when a promise is returned, it creates a promise and then return it , which is obviously of fuflfilled state 
+  })
+  .then(function (json) {
+    console.log(json)
+  });
+console.log("after");
 
 
