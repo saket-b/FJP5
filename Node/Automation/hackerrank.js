@@ -193,6 +193,7 @@ function questionSolver(url, idx) {
         let submitButtonClickedPromise = curTab.click(".hr-monaco-submit");
         return submitButtonClickedPromise;
       })
+      
       .then(function () {
         console.log("code submitted successfully");
         resolve();
