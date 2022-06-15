@@ -109,37 +109,53 @@
     </div>
 
     <script>
-        let select = document.querySelector("select");
-        select.addEventListener("change", function()
-        {
-            let selectedValue = select.value;
+       
+       let select = document.querySelector("select");
 
-            let allTickets = document.querySelectorAll("p");
-            if(selectedValue =='all')
+       select.addEventListener("change",function(){
+
+        let selectvalue = select.value;
+        console.log(selectvalue);
+
+        let allTicket_p = document.querySelectorAll("p");
+
+            if( selectvalue == "all")
             {
-                for( let i=0; i<allTickets.length; i++)
+                for( let i=0; i<allTicket_p.length; i++)
                 {
-                    allTickets[i].style.display ="block";
+                    allTicket_p[i].style.display = 'block';
                 }
             }
             else 
             {
-                for(let i=0; i<allTickets.length; i++)
+               // console.log("saket");
+               console.log(allTicket_p.length);
+                for( let i=0; i<allTicket_p.length; i++)
                 {
-                    if(allTickets[i].getAttribute("data-category") != selectedValue)
+                    // console.log("saket");
+                    // console.log(allTicket_p[i].getAtrribute("data-category"));
+                    if( allTicket_p[i].getAttribute("data-category") ==selectvalue)
                     {
-                        allTickets[i].style.display="none";
+                    allTicket_p[i].style.display = "block";
                     }
                     else 
                     {
-                        allTickets[i].style.display=  "block";
+                        allTicket_p[i].style.display = "none";
                     }
+                    // if(allTicket_p[i].getAttribute("data-category")!=selectvalue){
+                    //     //display nhi krni 
+                    //     allTicket_p[i].style.display = "none"
+                    // }
+                    // else{ //agar selectedValue ke equal h 
+                    //     allTicket_p[i].style.display = "block"
+                    // }
                 }
-            }
-        }
-        
-        )
 
+            }
+
+       });
+
+       //console.log(filter);
 
 
     </script>

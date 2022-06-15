@@ -24,22 +24,25 @@
     </ul>
 
     <script>
-        // q2 Fix the list by inserting the missing element
 
-        //3 Steps 
-        //step 1-> get all li elements
-        let unorderedList=document.querySelector("ul");
-        console.log(unorderedList);
-        let liElements=document.querySelectorAll("li");
-        console.log(liElements);
-        //step 2-> create li element
-        let seventhLiElem=document.createElement("li");
-        seventhLiElem.innerText='7';
-        // step 3-> insert before <li>8</li> element
-        let eightLiElem=liElements[6];
-                           //what to insert, before which ele to insert
-        unorderedList.insertBefore(seventhLiElem, eightLiElem);
-        // inserts a node before a reference node as a child of a specified parent node.
+        // 1 step select unordered list
+
+        
+        let unordered_list = document.querySelector("ul");
+
+        console.log(unordered_list);
+
+        // get all lis element;
+        let list = document.querySelectorAll("li");
+        console.log(list);
+
+        let create_li_text = document.createElement("li");
+
+        create_li_text.innerText = "7";
+
+        let  eight_ele = list[6];
+            console.log(eight_ele);
+         unordered_list.insertBefore(create_li_text, eight_ele);
 
     </script>
 </body>

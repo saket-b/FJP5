@@ -154,7 +154,7 @@ for( let i=0; i< toolBoxXolors.length; i++)
 
 // To display all the tickets of all colors on double clicking
 
-    toolBoxXolors[i].addEventListener("dblclicks", function () {
+    toolBoxXolors[i].addEventListener("dblclick", function () {
         
         // remove all the color specific tickets
         let allTickets = document.querySelectorAll(".ticket-cont");

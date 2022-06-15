@@ -56,30 +56,46 @@
     <div class="card" data-color="blue"></div>
     <div class="card" data-color="green"></div>
     <div class="card" data-color="blue"></div>
-    <div class="card" data-color="green"></div>
     <div class="card" data-color="blue"></div>
-
-   
-    </divclass>
-
+    <div class="card" data-color="green"></div>
+    
+    <!-- difference between currentTraget and target -->
+    <div class="card card1" data-color="green">
+         <div class="innerbox">
+            <p>Hello from card 1</p>
+        </div>
+    </div>
+    
     <script>
+        // Q4 Write a script which fetches the data-color attribute of the card on 
+      //double clicking on them and attaches the fetched class to that card.
+      // Also change the data-color attribute to "used"
 
-        let cards = document.querySelectorAll(".card");
-        for(let i=0; i<cards.length; i++)
-        {
-            cards[i].addEventListener("dblclick", function(e)
-            {
-                let classToBeAtteched = e.currentTarget.getAttribute('data-color');
-                e.currentTarget.setAttribute('data-color', "used");
+      // select all class 
 
-                e.currentTarget.classList.add(classToBeAtteched);
-            });
-        }
+      let class_list = document.querySelectorAll(".card");
 
-        
+      console.log(class_list);
+
+      for(let i =0; i<class_list.length; i++)
+      {
+          //console.log(class_list[i]);
+            class_list[i].addEventListener("dblclick", function(e){
+
+           console.log(e);
+
+           let color_ele = e.currentTarget.getAttribute('data-color');
+           console.log(color_ele);
+
+           e.currentTarget.setAttribute('data-color', "used");
+
+           e.currentTarget.classList.add(color_ele);
+           
+          });
+      }
+    
 
     </script>
-    
 </body>
 
 </html>

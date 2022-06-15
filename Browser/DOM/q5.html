@@ -20,24 +20,34 @@
 
 <body>
     <div class="cell"></div>
-
-    <p> Style me </p>
+    <p>Style me</p>
     <script>
-        let cell = document.querySelector(".cell");
-        let p = document.querySelector("p");
-        console.log(p.style);
-        p.style.color="blue";
-        console.log(p.style);
+         // Jail The Mouse
+            // Q You are given an empty cell. 
+            //Write a script that whenever the mouse enters 
+            //the cell jail should be drawn over it and it should be removed once it 
+            
+            let ele = document.querySelector(".cell");
 
-        cell.addEventListener("mouseover", function(){
-            cell.style.background = 'url(./jail.jpg)'
-        });
+            let p_ele = document.querySelector("p");
 
-        cell.addEventListener("mouseout", function(){
-            cell.style.background ='none';
-        })
+            console.log(p_ele.style);
+            p_ele.style.color ='blue';
+
+            ele.addEventListener("mouseover", function(){
+
+                ele.style.background = 'url("./jail.jpg")';
+            }
+            );
+
+            ele.addEventListener("mouseout" ,function(){
+
+                ele.style.background= 'none';
+            });
+         //   console.log(ele);
+
+
     </script>
-    
 </body>
 
 </html>
