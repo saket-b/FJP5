@@ -1,4 +1,13 @@
+let gallery = document.querySelector(".gallery");
 
+gallery.addEventListener("click", () =>{
+
+    location.assign("./gallery.html");
+});
+
+
+
+var uid = new ShortUniqueId();
 let video = document.querySelector("video");
 let captureBtnCont = document.querySelector(".capture-btn-cont");
 
@@ -25,27 +34,49 @@ navigator.mediaDevices.getUserMedia(constraints)
     recorder = new MediaRecorder(stream);
     recorder.addEventListener("start", (e)=>{
         chunks= [];
+        console.log("rec started");
     });
 
     recorder.addEventListener("dataavailable", (e)=>{
 
         chunks.push(e.data);
+        console.log("recordeing pause");
     });
     recorder.addEventListener("stop", ()=>{
 
         // convert video
         let blob = new Blob(chunks, {type : 'video/mp4'});
-        console.log(blob);
+        chunks=[]
+        console.log("rec stop");
         //download video on desktop
 
 
         let videoUrl = URL.createObjectURL(blob);
-        console.log(videoUrl);
+         console.log(videoUrl);
 
-        let a = document.createElement('a');
-        a.href = videoUrl;
-        a.download = "myVideo.mp4";
+        // let a = document.createElement('a');
+        // a.href = videoUrl;
+        // a.download = "myVideo.mp4";
 //a.click();
+
+        if( db)
+        {
+            let videoId = uid();
+            let dbTransaction = db.transaction("video", "readwrite");
+
+            let videoStore = dbTransaction.objectStore("video");
+
+            let videoEntry={
+                id      :`vid-${videoId}`,
+                blobDat :    blob,
+            };
+
+            let addRequest = videoStore.add(videoEntry);
+
+            addRequest.onsuccess=()=>{
+                console.log("video added to db successfully");
+            };
+        }
 
     })
 });
@@ -73,6 +104,25 @@ captureBtnCont.addEventListener("click", (e)=>{
 //    let img = document.createElement("img");
 //     img.src = imageUrl;
 //     document.body.append(img);
+
+    if( db)
+        {
+            let imageId = uid();
+            let dbTransaction = db.transaction("image", "readwrite");
+
+            let imageStore= dbTransaction.objectStore("image");
+
+            let imageEntry={
+                id : imageId,
+                url:imageUrl,
+            };
+
+            let addRequest = imageStore.add(imageEntry);
+
+            addRequest.onsuccess=()=>{
+                console.log("image added to db successfully");
+            };
+        }
 
     setTimeout(()=>{
         captureBtn.classList.remove("scale-capture");
@@ -134,23 +184,23 @@ function startTimer() {
 
 function stopTimer() {
     clearInterval(timerId);
-    console.log("saket");
+  //  console.log("saket");
     timer.innerText = '00:00:00';
     timer.style.display='none';
     
 }
 
-let filterlayers = document.querySelector(".filter-layer");
 
-let allfilters = document.querySelectorAll(".filter");
-
-
-
-    
-allfilters.forEach((filterElem) => {
+let filterLayer = document.querySelector(".filter-layer");
+let allFilters = document.querySelectorAll(".filter");
+console.log(allFilters);
+allFilters.forEach((filterElem) => {
+    console.log("filter");
     filterElem.addEventListener('click', () => {
         transparentColor = getComputedStyle(filterElem).getPropertyValue('background-color');
-        filterlayers.style.backgroundColor = transparentColor;
+        filterLayer.style.backgroundColor = transparentColor;
     })
-});
+})
+
+
 

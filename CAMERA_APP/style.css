@@ -19,18 +19,17 @@ video{
 }
 
 .action-cont{
-    height: 12rem;
-    width: 5rem;
-    /* background-color: aquamarine; */
-    position: absolute;
-    top: calc((100vh - 12rem)/2);
-    left :calc((100vw - 10rem));
-    display: flex;
+     height: 12rem;
+     width: 5rem;
+   
+        position: absolute;
+    top: calc((100vh - 12rem) / 2);
+    left:calc(100vw - 10rem);
+    display: flex; 
     flex-direction: column;
     justify-content: space-around;
-
     z-index: 2;
-}
+ }
 
 .record-btn{
     background-color: red;
@@ -49,6 +48,7 @@ video{
     align-items: center;
 }
 
+
 .capture-btn{
     background-color: white;
     height: 3rem;
@@ -56,19 +56,14 @@ video{
     border-radius: 50%;
 }
 
-/* .timer-btn{
-    background-color: white;
-    height: 3rem;
-    width: 3rem;
-    left: 3rem;
-    border-radius: 50%;
-} */
+
 
 .timer-cont{
     position: absolute;
     bottom: 10rem;
     color: white;
     left: 3rem;
+    z-index: 2;
 
 }
 .timer{
@@ -77,46 +72,48 @@ video{
 }
 
 
-.filter-cont{
-    position: absolute;
+ .filter-cont{
+     position:absolute;
     background-color: lightgray;
     height: 16rem;
     width: 5rem;
     top: calc((100vh - 16rem)/2);
-}
+    left:3rem;
+   
+    z-index: 2;
+ }
 
-.filter{
-    height: 4rem;
-    background-image: url(https://picsum.photos/seed/picsum/200/300 );
-    background-size: 100% ;
+ .filter{
+     height:4rem;
+     background-image: url(https://picsum.photos/seed/picsum/200/300);
+    background-size: 100% 100%;
     background-repeat: no-repeat;
     background-position: center;
     background-blend-mode: color-burn;
-}
+ }
 
-.orange{
-    background-color: orange;
+ .orange{
+    background-color: #ffa50052;
 }
-
 .brown{
-    background-color: burlywood;
+    background-color:#a52a2a59 ;
 }
-
 .pink{
-    background-color: pink;
+    background-color:#ffc0cb57 ;
 }
-
 .transparent{
     background-color: transparent;
 }
+
+
 
 .filter-layer{
     height: 100vh;
     width: 100vw;
     z-index: 1;
-    /* background color */
+    
     position: absolute;
-    top :0;
+    top: 0;
     left: 0;
 }
 
@@ -128,7 +125,7 @@ video{
 .scale-record{
     animation-name: scale-record;
     animation-iteration-count: infinite;
-    animation-duration: 0.5s;
+    animation-duration: 1s;
 }
 
 @keyframes scale-capture {
@@ -161,3 +158,7 @@ video{
     right:6rem;
     z-index: 2;
 }
+.gallery:hover{
+    cursor: pointer;
+}
+

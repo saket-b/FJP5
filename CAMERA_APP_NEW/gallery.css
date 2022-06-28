@@ -1,6 +1,7 @@
+
+
 *{
     box-sizing: border-box;
-
 }
 
 body{
@@ -8,31 +9,30 @@ body{
     padding: 0;
 }
 h1{
-    margin: 0;
+    margin:0;
+    /* center gallery , search on web  */
 }
 
 .back{
-    width: 5rem;
+    width:5rem;
     height: 5rem;
     background-color: black;
-    color: white;
+    color:white;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     position: fixed;
-    bottom: 4rem;
+    bottom:4rem;
     right: 5rem;
 }
 
 .back:hover{
-    cursor: pointer;
+    cursor:pointer;
 }
 
-
 .gallery-cont{
-    
-    background-color: rgb(27, 156, 156);
+    background-color: rgb(5, 105, 105);
     min-height: 100vh;
     width: 100vw;
     display: flex;
@@ -43,34 +43,32 @@ h1{
 .media-cont{
     height: 15rem;
     width: 15rem;
+    /* background-color: rgb(4, 33, 4); */
     border: 10px solid white;
     margin: 2rem;
 }
-
-.media{
-    height: calc(100% - 2rem - 2rem);
+.media {
+    height: calc( 100% - 2rem - 2rem );
 }
-
-.media>*{
-    width: 100%;
+.media > *{
+    width:100% ;
     height: 100%;
-    object-fit: cover;
+    object-fit: fill;
 }
-
 .action-btn{
-    height: 2rem;
-    color: white;
+    height:2rem;
+    color:white;
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.media-cont :hover{
+
+.action-btn:hover{
     cursor: pointer;
 }
 
 .download{
     background-color: black;
-    
 }
 
 .delete{
