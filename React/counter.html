@@ -1,0 +1,108 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script> 
+
+    <title>Document</title>
+</head>
+<body>
+    <div id = "root"> </div>
+</body>
+
+<script type="text/babel">
+
+    class Counter extends React.Coponent{
+
+        constructor(){
+            super();
+            this.state={
+                count:0
+            }
+        }
+            
+            increament=()=>{
+                this.setState(
+                    {
+                        count:this.state.count+1
+                    })
+            }
+
+            decreament = ()=>{
+                this.setState({
+                    count:this.state.count - 1
+                })
+            }
+
+            render(){
+                return(
+                    <React.Fragment>
+                    <button onClick = {this.increament}>+</button>
+                    <h1>{this.state.count}</h1>
+                    <button onClick = {this.decreament}>-</button>
+                        </React.Fragment>
+                )
+            }
+
+    }
+
+    ReactDOM.render(<Counter/>, document.getElementById("root"))
+        
+
+</script>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <!-- <script type="text/javascript" src="react-0.13.2.js"></script> -->
+    <title>class Components</title>
+</head>
+<body>
+    <div id="root"> saket </div>
+</body>
+<script type="text/babel">
+
+    class Counter extends Reacts.Component{
+        constructor(){
+            super();
+            this.state={
+                count:0
+            }
+        }
+
+        increment=()=>{
+            this.setState({
+                count:this.state.count+1
+            })
+        }
+
+
+
+        render(){
+            return(
+                <React.Fragment>
+                <button onClick={this.increment}>+</button>
+                <h1>{this.state.count}</h1>
+                <button>-</button>
+                </React.Fragment>
+            )
+        }        
+    }
+
+    ReactDOM.render(<Counter/>,document.getElementById("root"));
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<Counter/>);
+</script>
+</html>
