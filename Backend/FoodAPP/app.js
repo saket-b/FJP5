@@ -1,5 +1,6 @@
 const { Router } = require("express");
 const express = require("express");
+const mongoose = require("mongoose");
 let app = express();
 
 app.use(express.json());
@@ -10,8 +11,10 @@ let users=
     
      
 ]
-    
-//console.log(users);
+   const password = "oYw1mXQZEsOjodft";
+   
+   const db_link = "mongodb+srv://admin:oYw1mXQZEsOjodft@cluster0.f1mfevb.mongodb.net/?retryWrites=true&w=majority"
+console.log(users);
 // app.get("/user", (req, res)=>{
 
 //     console.log("get request");
@@ -20,8 +23,8 @@ let users=
 // });
 
 // mini app
-let userRouter = express.Router();
 let authRouter = express.Router();
+let userRouter = express.Router();
 
 //app.use("/user", userRouter);
 app.use("/auth", authRouter);
@@ -39,7 +42,7 @@ app.use("/auth", authRouter);
 
 authRouter
 .route("/signUp")
-.get(getsignUp)
+.get(middleware,getsignUp)
 .post(postsignUp)
 
 // function getUser(req, res){
@@ -91,20 +94,90 @@ authRouter
 //     res.send(obj);
 // }
 
+function middleware( req, res, next)
+{
+
+    console.log(" inside middleware");
+    next();
+}
+
+
+
+
 function getsignUp(req, res){
 
-
-   // let data = req.body;
-    //console.log("get data", data);
-
-    res.sendFile("/public/index.html", {root :__dirname})
-
-}
+    console.log("saket");
+     let data = req.body;
+     console.log("get data", data);
+ 
+     res.sendFile("/public/index.html", {root :__dirname})
+ 
+ }
 
 function postsignUp(req, res){
 
     let body= req.body;
     console.log(body);
-    res.send("data send sucessfully");
+    res.send("data send sucessfully", body);
 
 }
+mongoose.set('strictQuery',false);
+
+mongoose.connect(db_link)
+.then( function(db){
+
+    console.log("db connected");
+   // console.log(db);
+})
+.catch( function(err) 
+{
+    console.log(err);
+})
+
+
+// dhacha 
+
+const userschema = mongoose.Schema({
+    name :{
+        type : String,
+        required : true
+    },
+    email :{
+        type : String,
+        unique: true,
+        required : true
+    },
+    password :{
+        type : String,
+        required : true,
+    },
+    confirmpassword :{
+        type : String,
+        required:true
+    }
+});
+
+
+// model banao 
+
+
+const usermodel = mongoose.model("usermodel", userschema);
+
+async function createuser(){
+
+    let user ={
+        name :"saket",
+        email:"saket0403@gmail.com",
+        password : "saket3",
+        confirmpassword: "saket3"
+    };
+
+     let data = await usermodel.create(user);
+     console.log(data);
+
+};
+
+createuser();
+
+
+ 
