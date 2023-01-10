@@ -1,6 +1,8 @@
 const { Router } = require("express");
 const express = require("express");
 const mongoose = require("mongoose");
+const bodyParser = require('body-parser');
+const emailValidator = require("email-validator");
 let app = express();
 
 app.use(express.json());
@@ -26,16 +28,15 @@ console.log(users);
 let authRouter = express.Router();
 let userRouter = express.Router();
 
-//app.use("/user", userRouter);
+app.use("/user", userRouter);
 app.use("/auth", authRouter);
+userRouter.route("/")
+.get(getUser)
+.post(postUser)
+.patch(updateUser)
+.delete(deleteUser);
 
 // userRouter
-// .route("/")
-// .get(getUser)
-// .post(postUser)
-// .patch(updateUser)
-// .delete(deleteUser);
-
 // userRouter
 // .route("/:id")
 // .get(getUserByid);
@@ -45,54 +46,81 @@ authRouter
 .get(middleware,getsignUp)
 .post(postsignUp)
 
-// function getUser(req, res){
 
-//     console.log(req.query);
-//     res.send(users);
+async function getUser(req, res){
 
-// }
+    let allusers = await usermodel.find();
+    res.json({message:"data send succesfully",
+            data:allusers});
 
-// function postUser(req, res){
+}
 
-//     users = req.body;
+async function postUser(req, res){
 
-//     res.send(req.body);
-// }
+    let user = req.body;
 
-// function updateUser(req, res){
+    let data = await usermodel.create(user);
 
-//     let update = req.body;
-//     console.log(update);
-//     for( let i=0; i<users.length; i++)
-//     {
-//         if( users[i].id == update.id)
-//         users[i].name = update.name;
-//     }
-//     res.send(req.body);
+    res.json({
+        message : "user created",
+        data: data
+    })
 
-// }
+    
+}
 
-// function deleteUser(req, res){
+async function updateUser(req, res){
 
-//     users = {};
-//     res.send("delete sucessfully");
+    // let update = req.body;
+    // console.log(update);
+    // for( let i=0; i<users.length; i++)
+    // {
+    //     if( users[i].id == update.id)
+    //     users[i].name = update.name;
+    // }
+    // res.send(req.body);
 
-// }
+    let usertobeupdate = req.body;
+
+    let user = await usermodel.findOneAndUpdate({"email":"sk@12gmail.com"}, usertobeupdate);
+
+    res.json({
+        message :"updated",
+        data : user
+    })
+
+}
+
+async function deleteUser(req, res){
+
+    // users = {};
+    // res.send("delete sucessfully");
+
+    let usertobedeleted = req.body;
+
+    let data = await usermodel.findOneAndDelete(usertobedeleted);
+
+    res.json({
+        message:"data deleted successfully",
+        data: data
+    });
+
+}
 
 
-// function getUserByid(req, res){
+function getUserByid(req, res){
 
-//     let obj;
+    let obj;
 
-//     let paramsid = req.params.id;
+    let paramsid = req.params.id;
 
-//     for( let i=0; i<users.length; i++)
-//     {
-//         if( users[i].id == paramsid)
-//         obj = users[i];
-//     }
-//     res.send(obj);
-// }
+    for( let i=0; i<users.length; i++)
+    {
+        if( users[i].id == paramsid)
+        obj = users[i];
+    }
+    res.send(obj);
+}
 
 function middleware( req, res, next)
 {
@@ -145,39 +173,56 @@ const userschema = mongoose.Schema({
     email :{
         type : String,
         unique: true,
-        required : true
+        required : true,
+        validate : function(){
+            return  emailValidator.validate(this.email);
+        }
     },
     password :{
         type : String,
         required : true,
+        minlength:8
     },
     confirmpassword :{
         type : String,
-        required:true
+        required:true,
+        validate : function(){
+            return this.password == this.confirmpassword;
+        }
     }
 });
 
 
+userschema.pre("save", function(){
+
+    console.log("pre saving data", this);
+    this.confirmpassword = undefined
+});
+
+userschema.post("save", function(obj){
+    console.log("post saving data", obj);
+})
+
 // model banao 
 
 
-const usermodel = mongoose.model("usermodel", userschema);
+ const usermodel = mongoose.model("usermodel", userschema);
 
-async function createuser(){
+// async function createuser(){
 
-    let user ={
-        name :"saket",
-        email:"saket0403@gmail.com",
-        password : "saket3",
-        confirmpassword: "saket3"
-    };
+//     let user ={
+//         name :"saket",
+//         email:"saket0403@gmail.com",
+//         password : "saket3",
+//         confirmpassword: "saket3"
+//     };
 
-     let data = await usermodel.create(user);
-     console.log(data);
+//      let data = await usermodel.create(user);
+//      console.log(data);
 
-};
+// };
 
-createuser();
+// createuser();
 
 
  
