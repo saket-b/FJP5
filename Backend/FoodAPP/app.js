@@ -1,8 +1,8 @@
 const { Router } = require("express");
 const express = require("express");
-const mongoose = require("mongoose");
+const usermodel = require("./models/userModel");
+
 const bodyParser = require('body-parser');
-const emailValidator = require("email-validator");
 let app = express();
 
 app.use(express.json());
@@ -13,9 +13,7 @@ let users=
     
      
 ]
-   const password = "oYw1mXQZEsOjodft";
-   
-   const db_link = "mongodb+srv://admin:oYw1mXQZEsOjodft@cluster0.f1mfevb.mongodb.net/?retryWrites=true&w=majority"
+
 console.log(users);
 // app.get("/user", (req, res)=>{
 
@@ -40,6 +38,16 @@ userRouter.route("/")
 // userRouter
 // .route("/:id")
 // .get(getUserByid);
+
+userRouter
+.route("/setCookies")
+.get(setcookies)
+
+userRouter
+.route("/getCookies")
+.get(getcookies)
+
+
 
 authRouter
 .route("/signUp")
@@ -149,64 +157,27 @@ function postsignUp(req, res){
     res.send("data send sucessfully", body);
 
 }
-mongoose.set('strictQuery',false);
-
-mongoose.connect(db_link)
-.then( function(db){
-
-    console.log("db connected");
-   // console.log(db);
-})
-.catch( function(err) 
-{
-    console.log(err);
-})
 
 
-// dhacha 
+function setcookies(req, res){
 
-const userschema = mongoose.Schema({
-    name :{
-        type : String,
-        required : true
-    },
-    email :{
-        type : String,
-        unique: true,
-        required : true,
-        validate : function(){
-            return  emailValidator.validate(this.email);
-        }
-    },
-    password :{
-        type : String,
-        required : true,
-        minlength:8
-    },
-    confirmpassword :{
-        type : String,
-        required:true,
-        validate : function(){
-            return this.password == this.confirmpassword;
-        }
-    }
-});
+   // res.setHeader('Set-Cookies', "islogedin = true");
+    res.cookie("islogedin", true/*{ secure:true, httpOnly :true}*/);
+    res.cookie("isMember", true);
+
+    res.send("cookies send successfully");
+}
+
+ function getcookies(req, res){
+
+    let cookie = req.cookies.islogedin;
+    console.log(cookie);
+    res.send("cookie recieved");
+}
 
 
-userschema.pre("save", function(){
-
-    console.log("pre saving data", this);
-    this.confirmpassword = undefined
-});
-
-userschema.post("save", function(obj){
-    console.log("post saving data", obj);
-})
-
-// model banao 
 
 
- const usermodel = mongoose.model("usermodel", userschema);
 
 // async function createuser(){
 
