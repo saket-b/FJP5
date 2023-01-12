@@ -52,6 +52,8 @@ async function logiUser(req, res)
                 //bcrypt wali cheese bachi hai
                 if( user.password == data.password)
                 {
+                    res.cookie("isLogedin", true, {httpOnly:true});
+                   // res.cookie({httpOnly:true});
                     res.json({
                         message :"user is loged in",
                         data: user,

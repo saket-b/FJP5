@@ -1,9 +1,10 @@
 const express = require("express");
 const userRouter = express.Router();
 const usermodel = require("../models/userModel");
+const authHelper = require("./authHelper");
 
 userRouter.route("/")
-.get(getUser)
+.get(authHelper, getUser)
 .post(postUser)
 .patch(updateUser)
 .delete(deleteUser);
