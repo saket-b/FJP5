@@ -55,15 +55,15 @@ userschema.pre("save", function(){
     this.confirmpassword = undefined
 });
 
-userschema.pre("save", async function(){
+// userschema.pre("save", async function(){
 
-    const satlRound = 10;
-    let salt = await brypt.genSalt();
-    let hash = await brypt.hashSync(this.password , salt);
-    this.password = hash;
-    console.log(hash);
+//     const satlRound = 10;
+//     let salt = await brypt.genSalt();
+//     let hash = await brypt.hashSync(this.password , salt);
+//     this.password = hash;
+//     console.log(hash);
     
-});
+// });
 
 
 
@@ -80,4 +80,3 @@ module.exports = usermodel;
 
 
 
-module.exports = usermodel;
