@@ -107,7 +107,7 @@ function setcookies(req, res){
  
   function getcookies(req, res){
  
-     let cookie = req.cookies.islogedin;
+     let cookie = req.cookies.logedin;
      console.log(cookie);
      res.send("cookie recieved");
  }

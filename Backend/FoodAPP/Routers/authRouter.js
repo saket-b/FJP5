@@ -1,6 +1,8 @@
 const express = require("express");
 const authRouter = express.Router();
 const usermodel = require("../models/userModel")
+const jwt   = require('jsonwebtoken');
+const JWT_KEY = require("/home/saket/FJP5/Backend/Secret.js");
 
 authRouter
 .route("/signUp")
@@ -46,14 +48,19 @@ async function logiUser(req, res)
         let data = req.body;
         if( data.email)
         {   
+
             let user =  await usermodel.findOne({email:data.email});
             if(user)
             {
                 //bcrypt wali cheese bachi hai
                 if( user.password == data.password)
                 {
-                    res.cookie("isLogedin", true, {httpOnly:true});
-                   // res.cookie({httpOnly:true});
+                    let uid = user['_id'];
+                    console.log("request inside password", req.body);
+                    let token = jwt.sign({"payload":uid}, JWT_KEY);
+                    res.cookie("logedin", token, {httpOnly : true});
+                   // res.cookie("isLogedin", true, {httpOnly:true});
+                    //res.cookie({httpOnly:true});
                     res.json({
                         message :"user is loged in",
                         data: user,
