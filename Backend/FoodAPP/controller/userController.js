@@ -3,25 +3,42 @@ const usermodel = require("../models/userModel");
 
 module.exports.getUser = async function getUser(req, res){
 
-    let allusers = await usermodel.find();
-    res.json({message:"data send succesfully",
-            data:allusers});
+    try{
+        let id = req.params.id;
+        let user = await usermodel.findById(id);
+        if( user)
+        {
+            res.json({message:"data send succesfully",
+            data:user});
+        }
+        else 
+        {
+            res.json({
+                message:"user is not found"
+            })
+        }
+    }
+    catch(err){
+            res.json({
+                message:"invalid user"
+            })
+    }
 
 }
 
-module.exports.postUser=async function postUser(req, res){
+// module.exports.postUser=async function postUser(req, res){
 
-    let user = req.body;
+//     let user = req.body;
 
-    let data = await usermodel.create(user);
+//     let data = await usermodel.create(user);
 
-    res.json({
-        message : "user created",
-        data: data
-    })
+//     res.json({
+//         message : "user created",
+//         data: data
+//     })
 
     
-}
+// }
 
 module.exports.updateUser = async function updateUser(req, res){
 
@@ -33,15 +50,41 @@ module.exports.updateUser = async function updateUser(req, res){
     //     users[i].name = update.name;
     // }
     // res.send(req.body);
+    try{
+        let id = req.params.id;
+        let user = await usermodel.findById(id);
+        let dataTobeUpdated = req.body;
 
-    let usertobeupdate = req.body;
+        if( user)
+        {
+            const keys = [];
+            for( key in dataTobeUpdated)
+            {
+                keys.push(key);
+            }
 
-    let user = await usermodel.findOneAndUpdate({"email":"sk@12gmail.com"}, usertobeupdate);
-
-    res.json({
-        message :"updated",
-        data : user
-    })
+            for( let i=0; i<keys.length; i++)
+            {
+                user[keys[i]] = dataTobeUpdated[keys[i]];
+            }
+            const userUpdated = user.save();
+            res.json({
+            message :"updated",
+            data : user
+            })
+        }
+        else {
+            res.json({
+                message:"user is not found"
+            })
+        }
+    }
+    catch(err)
+    {
+        res.json({
+            message:err.message
+        })
+    }
 
 }
 
@@ -49,31 +92,67 @@ module.exports.deleteUser = async function deleteUser(req, res){
 
     // users = {};
     // res.send("delete sucessfully");
-
-    let usertobedeleted = req.body;
-
-    let data = await usermodel.findOneAndDelete(usertobedeleted);
-
-    res.json({
-        message:"data deleted successfully",
-        data: data
-    });
+    try{
+        let id = req.params.id;
+        let user = await usermodel.findByIdAndDelete(id);
+        
+        if( user)
+        {
+            res.json({
+                message:"data deleted successfully",
+                data: data
+            });
+        }
+        else {
+            res.json({
+                message:"user is not found"
+            })
+        }
+    }
+    catch(err)
+    {
+        res.json({
+            message:err.message
+        })
+    }
 
 }
 
 
-module.exports.getUserByid = function getUserByid(req, res){
+module.exports.getAlluser = async function getAllUser(req, res){
 
-    let obj;
-
-    let paramsid = req.params.id;
-
-    for( let i=0; i<users.length; i++)
-    {
-        if( users[i].id == paramsid)
-        obj = users[i];
+    
+    try{
+        let users = await usermodel.find();
+        if( users)
+        {
+            res.json({
+                message :"user retrieve",
+                data : users
+            })
+        }
+        else 
+        {
+            res.json({
+                message:"user is not found"
+            })
+        }
     }
-    res.send(obj);
+    catch(err)
+    {
+        res.json({
+            message:err.message
+        })
+    }
+
+    // let paramsid = req.params.id;
+    //let obj;
+    // for( let i=0; i<users.length; i++)
+    // {
+    //     if( users[i].id == paramsid)
+    //     obj = users[i];
+    // }
+    // res.send(obj);
 }
 
 

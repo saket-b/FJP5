@@ -45,7 +45,17 @@ const userschema = mongoose.Schema({
         validate : function(){
             return this.password == this.confirmpassword;
         }
+    },
+    role :{
+        type:  String,
+        enum:['admin', 'user','restaurantowner', 'deliveryboy'],
+        default: user
+    },
+    profileImage:{
+        type:String,
+        default:'img/users/default.jpeg'
     }
+
 });
 
 
