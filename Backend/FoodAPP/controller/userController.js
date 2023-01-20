@@ -1,10 +1,13 @@
+const { findByIdAndUpdate } = require("../models/userModel");
 const usermodel = require("../models/userModel");
 
 
 module.exports.getUser = async function getUser(req, res){
 
     try{
-        let id = req.params.id;
+        console.log("inside getUser function");
+        let id = req.id;
+       // console.log("id = ", id);
         let user = await usermodel.findById(id);
         if( user)
         {
@@ -20,46 +23,39 @@ module.exports.getUser = async function getUser(req, res){
     }
     catch(err){
             res.json({
-                message:"invalid user"
+                message:err.message
             })
     }
 
 }
 
-// module.exports.postUser=async function postUser(req, res){
 
-//     let user = req.body;
-
-//     let data = await usermodel.create(user);
-
-//     res.json({
-//         message : "user created",
-//         data: data
-//     })
-
-    
-// }
 
 module.exports.updateUser = async function updateUser(req, res){
 
     // let update = req.body;
-    // console.log(update);
+     console.log("hello update user");
     // for( let i=0; i<users.length; i++)
-    // {
+    // {    
     //     if( users[i].id == update.id)
     //     users[i].name = update.name;
     // }
     // res.send(req.body);
     try{
+       console.log("id = ", req.params.id);
+
         let id = req.params.id;
         let user = await usermodel.findById(id);
         let dataTobeUpdated = req.body;
-
         if( user)
         {
             const keys = [];
-            for( key in dataTobeUpdated)
+            console.log("user ", user);
+        console.log("datatobeupdated ", dataTobeUpdated);
+
+            for( let key in dataTobeUpdated)
             {
+              //  console.log(key);
                 keys.push(key);
             }
 
@@ -67,8 +63,11 @@ module.exports.updateUser = async function updateUser(req, res){
             {
                 user[keys[i]] = dataTobeUpdated[keys[i]];
             }
-            const userUpdated = user.save();
-            res.json({
+            console.log("user ", user);
+            const userUpdated = await usermodel.findByIdAndUpdate(id, user);
+             
+            console.log("userupdated", userUpdated);
+            return   res.json({
             message :"updated",
             data : user
             })
@@ -82,25 +81,29 @@ module.exports.updateUser = async function updateUser(req, res){
     catch(err)
     {
         res.json({
-            message:err.message
-        })
+            message:err.message,
+            data:"hello"
+        }) 
     }
-
 }
 
+    
 module.exports.deleteUser = async function deleteUser(req, res){
 
     // users = {};
     // res.send("delete sucessfully");
+
     try{
         let id = req.params.id;
+        console.log("id in delete function = ", id);
         let user = await usermodel.findByIdAndDelete(id);
-        
+        console.log("user inside delete function = ", user);
         if( user)
         {
+            //console.log("inside user condition ");
             res.json({
                 message:"data deleted successfully",
-                data: data
+                data: user
             });
         }
         else {
@@ -119,10 +122,11 @@ module.exports.deleteUser = async function deleteUser(req, res){
 }
 
 
-module.exports.getAlluser = async function getAllUser(req, res){
+module.exports.getAllUser = async function getAllUser(req, res){
 
     
     try{
+        console.log("inside getalluser");
         let users = await usermodel.find();
         if( users)
         {

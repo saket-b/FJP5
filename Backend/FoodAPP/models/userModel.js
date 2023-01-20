@@ -1,9 +1,7 @@
 const mongoose = require("mongoose");
 const emailValidator = require("email-validator");
 const brypt = require("bcrypt");
-
-   
-const password = "oYw1mXQZEsOjodft";
+const crypto = require("crypto");
 const db_link = "mongodb+srv://admin:oYw1mXQZEsOjodft@cluster0.f1mfevb.mongodb.net/?retryWrites=true&w=majority"
 
 mongoose.connect(db_link)
@@ -17,7 +15,7 @@ mongoose.connect(db_link)
     console.log(err);
 })
 
-mongoose.set('strictQuery',true);
+//mongoose.set('strictQuery',false);
 
 // dhacha 
 
@@ -49,14 +47,33 @@ const userschema = mongoose.Schema({
     role :{
         type:  String,
         enum:['admin', 'user','restaurantowner', 'deliveryboy'],
-        default: user
+        default: 'user'
     },
     profileImage:{
         type:String,
         default:'img/users/default.jpeg'
-    }
+    },
+    resetToken : String
 
 });
+
+userschema.method.createResetToken = function(){
+
+    const resetTokenNew = crypto.randomBytes(32).toString("hex");
+
+    this.resetToken = resetTokenNew;
+    return resetTokenNew;
+
+}
+
+userschema.methods.resetpasswordHandler = function (password, confirmPassword){
+
+    this.password = password;
+    this.confirmPassword = confirmPassword;
+
+    this.resetToken = undefined;
+}
+
 
 
 userschema.pre("save", function(){
