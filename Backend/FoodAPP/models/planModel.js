@@ -62,7 +62,7 @@ console.log("data ", data);
     // let doc = new planmodel(planobj);
     // await doc.save();
 
-})();
+});
 
 
 
