@@ -19,7 +19,7 @@ mongoose.connect(db_link)
 
 // dhacha 
 
-const userschema = mongoose.Schema({
+const userschema = new mongoose.Schema({
     name :{
         type : String,
         required : true
