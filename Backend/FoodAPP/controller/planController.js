@@ -107,24 +107,27 @@ module.exports.updatePlan = async function updatePlan(req, res)
         let id = req.params.id;
         let data_tobe_updated = req.body;
 
-        let plan = planmodel.findById(id);
+        console.log("id = ", id);
+        console.log("before updation = ", data_tobe_updated);
+
+        let plan = await planmodel.findById(id);
+        console.log("plan not updated = ", plan);
         let keys= [];
         for(let key in data_tobe_updated)
         keys.push(key);
 
         // for( let key in keys)
         // plan[key] = data_tobe_updated[keys[key]];
-
         // methos 2
         for( let i=0; i<keys.length; i++)
         {
             plan[keys[i]] = data_tobe_updated[keys[i]];
         }
-
+        console.log("plan updated = ", plan);
         let data = await plan.save();
         res.json({
             message:"plan is updated ",
-            data: data
+            data: plan
         })
 
     }
@@ -142,7 +145,7 @@ module.exports.top3plan = async function top3plan(req, res)
         // this will top three average rating plans
         let top3plans = await planmodel.find().sort({ratingAverage : -1}).limit(3);
 
-        if( plans3)
+        if( top3plans )
         {
             res.json({
                 message:"get top three plans ",

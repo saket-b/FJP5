@@ -43,26 +43,26 @@ const planschema= mongoose.Schema({
 });
 
 
-const planmodel = mongoose.model("palnmodel", planschema);
+const planmodel = mongoose.model("planmodel", planschema);
 
 
-(async function  createplan(){
-    const planobj ={
-    name :"Yoga5",
-    duration: 10,
-    price : 1000,
-    ratingAverage : 4,
-    discount : 10
-    };
-    //method 1 : for creating model
-let data =  await planmodel.create(planobj);
-console.log("data ", data);
+// (async function  createplan(){
+//     const planobj ={
+//     name :"Yoga5",
+//     duration: 10,
+//     price : 1000,
+//     ratingAverage : 4,
+//     discount : 10
+//     };
+//     //method 1 : for creating model
+// let data =  await planmodel.create(planobj);
+// console.log("data ", data);
 
-    // Method 2 : for creating model
-    // let doc = new planmodel(planobj);
-    // await doc.save();
+//     // Method 2 : for creating model
+//     // let doc = new planmodel(planobj);
+//     // await doc.save();
 
-});
+// });
 
 
 

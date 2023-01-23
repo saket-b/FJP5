@@ -24,7 +24,7 @@ app.listen(3000);
 // let userRouter = express.Router();
 
 app.use("/user", userRouter);
-app.use("/plan", planRouter);
+ app.use("/plan", planRouter);
 //app.use("/auth", userRouter);
 
 
