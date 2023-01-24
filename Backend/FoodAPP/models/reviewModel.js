@@ -5,7 +5,7 @@ const db_link = "mongodb+srv://admin:oYw1mXQZEsOjodft@cluster0.f1mfevb.mongodb.n
 mongoose.connect(db_link)
 .then( function(db){
 
-    console.log("db connected");
+    console.log("review db connected");
    // console.log(db);
 })
 .catch( function(err) 

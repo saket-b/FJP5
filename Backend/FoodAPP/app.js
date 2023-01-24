@@ -3,6 +3,7 @@ const express = require("express");
 
 const userRouter= require("./Routers/userRouter");
 const planRouter = require("./Routers/planRouter");
+const reviewRouter = require("./Routers/reviewRouter")
 //const authRouter= require("./Routers/authRouter");
 const cookieParser = require("cookie-parser");
 let app = express();
@@ -24,7 +25,9 @@ app.listen(3000);
 // let userRouter = express.Router();
 
 app.use("/user", userRouter);
- app.use("/plan", planRouter);
+app.use("/plan", planRouter);
+app.use("/review", reviewRouter);
+
 //app.use("/auth", userRouter);
 
 
@@ -57,7 +60,7 @@ app.use("/user", userRouter);
 
 // createuser();
 
-const planmodel = require("./models/planModel");
+// const planmodel = require("./models/planModel");
 
 
 

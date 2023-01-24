@@ -1,8 +1,8 @@
 const express = require("express");
 const { application } = require("express");
 const userRouter = express.Router();
-const usermodel = require("../models/userModel");
-const authHelper = require("./authHelper");
+// const usermodel = require("../models/userModel");
+// const authHelper = require("./authHelper");
 const {getAllUser, getUser, deleteUser, updateUser} = require("../controller/userController");
 const {signup, login, protectRoute, isAuthorised, forgetpassword, resetpassword, logout} = require("../controller/authController");
 
