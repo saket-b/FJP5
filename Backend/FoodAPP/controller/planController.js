@@ -6,7 +6,7 @@ const planmodel = require("../models/planModel");
 module.exports.getAllPlan =async function getAllPlan(req, res)
 {
     try{
-
+        console.log("hello");
         let plans = await planmodel.find();
 
         if( plans)

@@ -1,13 +1,18 @@
-const reviewModel = require("../models/reviewModel");
+const express = require("express");
+const mongoose = require("mongoose");
+const reviewModel = require("../models/reviewModel")
 const planmodel = require("../models/planModel")
 
-module.exports.getAllreviews = async function getAllreviews(req, res)
+module.exports.getAllReviews = async function getAllReviews(req, res)
 {
     
     try{
-        const reviewAll_data = await reviewModel.find();
         console.log("inside getall");
-        console.log("data ", reviewwAll_data);
+        // console.log("req = ", req);
+        // console.log("res = ", res);
+        const reviewAll_data = await reviewModel.find();
+       
+
 
         if(reviewAll_data)
         {
@@ -26,17 +31,24 @@ module.exports.getAllreviews = async function getAllreviews(req, res)
     }
     catch(err)
     {
+        console.log("inside catch");
         res.status(500).json({
-            message:err.message
+            message:err.message,
+            data:"inside get all"
         })
     }
 }
+
+
+
 
 module.exports.getReview = async function getReview(req, res)
 {
     try{
         let id = req.params.id;
+        console.log("inside get review ");
         let data = await reviewModel.findById(id);
+        console.log("data ", data);
         if( data)
         {
             res.json({
@@ -130,13 +142,16 @@ module.exports.updateReview = async function updateReview(req, res)
         for( let key in review_to_updated)
             keys.push(key);
 
-        for( let i=0; i<review_to_updated.length; i++)
+        console.log("key", keys);
+        for( let i=0; i<keys.length; i++)
         {
             review[keys[i]] = review_to_updated[keys[i]];
         }
-        await data.save();
+        //console.log("reviw ", review_to_updated);
+       let data = await review.save();
         res.json({
             message:" review update successfully",
+            data: data
         })
          
     }

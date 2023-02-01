@@ -29,13 +29,13 @@ const reviewSchema = new mongoose.Schema({
     },
     user :{
         type : mongoose.Schema.ObjectId,
-        ref:"userModel",
+        ref:'usermodel',
         required: [true, "user schema is not filled"]
 
     },
     plan :{
         type : mongoose.Schema.ObjectId,
-        ref: "planModel",
+        ref: 'planmodel',
         required:[true, "plan model is not filled"]
 
     }
@@ -48,10 +48,17 @@ reviewSchema.pre(/^find/, function(next)
         path:"user",
         select:"name  profileImage"
     })
-    .populate("plan")
+    .populate("plan");
+
+    next();
 
 })
 
-const reviewModel = mongoose.model("reviewModel", reviewSchema);
+const reviewModel = mongoose.model("reviewmodel", reviewSchema);
 
 module.exports = reviewModel;
+
+
+
+
+
