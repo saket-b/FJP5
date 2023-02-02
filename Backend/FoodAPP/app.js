@@ -4,6 +4,7 @@ const express = require("express");
 const userRouter= require("./Routers/userRouter");
 const planRouter = require("./Routers/planRouter");
 const reviewRouter = require("./Routers/reviewRouter")
+const bookingRouter = require("./Routers/bookingRouter");
 //const authRouter= require("./Routers/authRouter");
 const cookieParser = require("cookie-parser");
 let app = express();
@@ -27,7 +28,7 @@ app.listen(3000);
 app.use("/user", userRouter);
 app.use("/plan", planRouter);
 app.use("/review", reviewRouter);
-
+app.use("/booking", bookingRouter);
 //app.use("/auth", userRouter);
 
 
