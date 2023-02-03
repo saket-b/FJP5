@@ -2,10 +2,10 @@ const express = require("express");
 const bookingRouter = express.Router();
 
 const protectRoute = require("../controller/authController");
-const createSession = require("../controller/bookingController");
+let createSession = require("../controller/bookingController");
 
 //bookingRouter.use(protectRoute);
-bookingRouter.use(express.static("public"));
+//bookingRouter.use(express.static("public"));
 bookingRouter
 .route("/creatSession")
 .get( function(req, res){
@@ -14,8 +14,8 @@ bookingRouter
 
 bookingRouter
 .route("/createSession")
-.post(createSession);
+.post(createSession)
 
 
 
-module.exports= bookingRouter
+module.exports= bookingRouter;

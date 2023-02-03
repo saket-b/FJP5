@@ -2,6 +2,7 @@ const express = require("express");
 const usermodel = require("../models/userModel")
 const jwt   = require('jsonwebtoken');
 const JWT_KEY = require("/home/saket/FJP5/Backend/Secret.js");
+const { sendMail } = require("../utility/nodemailer");
 
 
 
@@ -11,6 +12,7 @@ module.exports.signup = async function signup(req, res){
     try{
         let dataobj = req.body;
         let user    = await usermodel.create(dataobj);
+       sendMail("signup", user);
         if( user)
         {
             res.json({
@@ -178,14 +180,23 @@ module.exports.forgetpassword = async function forgetpassword(req, res){
     try{                                    //schema: body email    
         const user = await usermodel.findOne({email:email});
         if( user)
-        {
+    {
+                console.log("forget password ", user);
+
                let resetToken = user.createResetToken();
+               
                // reset link banana hai
+               console.log("reset Token = ", resetToken);
                // http://dk.com/resetpassword/resetToken
                let resetpasswordLink = `${req.protocol}://${req.get('host')}/resetpassword/${resetToken}}`; 
                 // send to email
                 // jo abhi baki hai
                 // usinf nodeemailer
+                let obj ={
+                    resetpasswordLink : resetpasswordLink,
+                    email :email
+                }
+                sendMail("resetpassword", obj);
         }
         else 
         {

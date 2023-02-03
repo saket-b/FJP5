@@ -2,6 +2,35 @@
 <html>
   <head>
     <title>Buy cool new product</title>
+   
+  </head>
+  <body>
+    <h3>Welcome to payment Gateway</h3>
+    <form action="/creatSession" method="POST">
+     <script
+      src="//checkout.stripe.com/v2/checkout.js"
+      class="stripe-button"
+      data-key = "pk_test_51MX6iqSAGwGAr8buI4ynbQkaEj5ozbLnPk4W9wQ95RjvAxXO9nYq3RiHBQR7QtPiHn8O7PbzQOQRcmX1YpOhcGWR00SfjE3BQL";
+      data-amount="700"
+      data-currency ="inr"
+      data-name = "FoodApp"
+      data-description = "Buy Food Plan"
+      data-locale ="auto"
+      >
+     </script> 
+
+    </form>
+     
+     
+   
+  </body>
+</html>
+
+<!-- 
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Buy cool new product</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://js.stripe.com/v3/"></script>
   </head>
@@ -14,9 +43,10 @@
           <h5>$20.00</h5>
         </div>
       </div>
-      <form action="/create-checkout-session" method="POST">
+      <form action="/createSession" method="POST">
+    
         <button type="submit" id="checkout-button">Checkout</button>
       </form>
     </section>
   </body>
-</html>
+</html> -->

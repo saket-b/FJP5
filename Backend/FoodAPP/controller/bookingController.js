@@ -4,9 +4,10 @@ const stripe = require("stripe")(Secret_key);
 const planmodel = require("../models/planModel");
 const usermodel = require("../models/userModel");
 
-module.exports.createSession = async function createSession(req, res){
+async function createSession(req, res){
 
     try{
+        console.log("inside create Session");
         let userid = req.id;
         let planid = req.params.id;
         console.log("inside create sessionn");
@@ -38,3 +39,5 @@ module.exports.createSession = async function createSession(req, res){
         })
     }
 }
+
+module.exports = createSession;

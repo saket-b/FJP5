@@ -92,7 +92,7 @@ module.exports.deleteUser = async function deleteUser(req, res){
 
     // users = {};
     // res.send("delete sucessfully");
-
+    console.log("inside delete");
     try{
         let id = req.params.id;
         console.log("id in delete function = ", id);
@@ -157,6 +157,13 @@ module.exports.getAllUser = async function getAllUser(req, res){
     //     obj = users[i];
     // }
     // res.send(obj);
+}
+
+module.exports.updateProfileImage = function updateProfileImage(req, res){
+    console.log("inside updateprofile");
+    res.json({
+        message:"image uploades successfully"
+    })
 }
 
 
