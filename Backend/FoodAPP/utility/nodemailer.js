@@ -13,7 +13,7 @@ module.exports.sendMail = async function sendMail(str, data){
     port: 587,
     secure: false, // true for 465, false for other ports
     auth: {
-      user: 'saketbharti201721@gmail.com', // generated ethereal user
+      user: 'saket@gmail.com', // generated ethereal user
       pass: 'tmsnemxsxlorymyc', // generated ethereal password
     },
   });
@@ -37,7 +37,7 @@ module.exports.sendMail = async function sendMail(str, data){
   // send mail with defined transport object
   console.log("======Line 36=============");
   let info = await transporter.sendMail({
-    from: '"FoodApp 👻" saketbharti201721@gmail.com', // sender address
+    from: '"FoodApp 👻" saket@gmail.com', // sender address
     to: data.email, // list of receivers
     subject: Osubject, // Subject line
     // text: Otext, // plain text body

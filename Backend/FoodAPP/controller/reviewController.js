@@ -42,15 +42,16 @@ module.exports.getAllReviews = async function getAllReviews(req, res)
 
 
 
-module.exports.getReview = async function getReview(req, res)
+module.exports.getPlanReview = async function getPlanReview(req, res)
 {
     try{
-        let id = req.params.id;
+        let planid = req.params.id;
         console.log("inside get review ");
-        let data = await reviewModel.findById(id);
-        console.log("data ", data);
-        if( data)
+        let reviews = await reviewModel.findBy(id);
+        console.log("data ", reviews);
+        if( reviews)
         {
+            reviews=reviews.filter(review=>review.plan["_id"]==planid);
             res.json({
                 message:"review one is retrived",
                 data : data

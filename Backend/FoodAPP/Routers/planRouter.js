@@ -18,6 +18,9 @@ planRouter
 .route("/plan/:id")
 .get(getPlan);
 
+planRouter
+.route("/top3plan")
+.get(top3plan);
 
 
 // admin and restaurant owner can only create, update, and delete plans;
@@ -35,9 +38,7 @@ planRouter
 .route("/updatePlan/:id")   
 .patch(updatePlan)
 
-planRouter
-.route("/top3plan")
-.get(top3plan);
+
 
 
 

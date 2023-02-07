@@ -69,7 +69,7 @@ userschema.method.createResetToken = function(){
 userschema.methods.resetpasswordHandler = function (password, confirmPassword){
 
     this.password = password;
-    this.confirmPassword = confirmPassword;
+    this.confirmpassword = confirmPassword;
 
     this.resetToken = undefined;
 }
