@@ -85,8 +85,10 @@ module.exports.createPlan = async function createPlan(req,res)
 module.exports.deletePlan = async function deletePlan(req, res)
 {
     try{
+        console.log("Inside plan delete function ");
         let id = req.params.id;
         let data_deleted = await planmodel.findByIdAndDelete(id);
+       
         res.json({
             message:"plan is deleted",
             data: data_deleted

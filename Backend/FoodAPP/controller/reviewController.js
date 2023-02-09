@@ -47,14 +47,14 @@ module.exports.getPlanReview = async function getPlanReview(req, res)
     try{
         let planid = req.params.id;
         console.log("inside get review ");
-        let reviews = await reviewModel.findBy(id);
+        let reviews = await reviewModel.find();
         console.log("data ", reviews);
         if( reviews)
         {
             reviews=reviews.filter(review=>review.plan["_id"]==planid);
             res.json({
                 message:"review one is retrived",
-                data : data
+                data : reviews
             })
         }
         else 
@@ -77,6 +77,7 @@ module.exports.getPlanReview = async function getPlanReview(req, res)
 module.exports.top3Review = async function top3Review(req, res)
 {
     try{
+        console.log("top 3 reviews");
         let data = await reviewModel.find().sort({rating : -1}).limit(3);
 
         if( data)
@@ -95,16 +96,18 @@ module.exports.top3Review = async function top3Review(req, res)
         }
 
     }
-    catch{
-
+    catch(err){
+            res.json({
+                message:err.message
+            })
     }
 }
 
 module.exports.creatReview = async function creatReview(req, res)
 {
     try{
-        let id = req.params.plan;
-        let plan = await planmodel.findById(id);
+        let planid = req.params.plan;
+        let plan = await planmodel.findById(planid);
         console.log("body ", req.body);
         let review = req.body;
         if( review && plan)
@@ -136,7 +139,8 @@ module.exports.creatReview = async function creatReview(req, res)
 module.exports.updateReview = async function updateReview(req, res)
 {
     try{
-        let id = req.params.id
+        let palnId = req.params.plan;
+        let id = req.body.id;
         let  review_to_updated = req.body;
         let  review = await reviewModel.findById(id);
         let keys=[];
@@ -146,6 +150,7 @@ module.exports.updateReview = async function updateReview(req, res)
         console.log("key", keys);
         for( let i=0; i<keys.length; i++)
         {
+            if(keys[i]=='id')continue;
             review[keys[i]] = review_to_updated[keys[i]];
         }
         //console.log("reviw ", review_to_updated);
@@ -168,11 +173,13 @@ module.exports.updateReview = async function updateReview(req, res)
 module.exports.deleteReview = async function deleteReview(req, res)
 {
     try{
-        let id = req.params.id
+        console.log("Inside Review");
+        let planId = req.params.plan;
+        let id = req.body.id;
         let review = await reviewModel.findByIdAndDelete(id);
       
         res.json({
-            message:" review update successfully",
+            message:" review delete successfully",
             data: review
         })
     }

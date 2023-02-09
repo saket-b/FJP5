@@ -1,5 +1,6 @@
 "use strict";
 const nodemailer = require("nodemailer");
+const emailsender = require("../../Secret");
 
 // async..await is not allowed in global scope, must use a wrapper
 module.exports.sendMail = async function sendMail(str, data){
@@ -13,8 +14,8 @@ module.exports.sendMail = async function sendMail(str, data){
     port: 587,
     secure: false, // true for 465, false for other ports
     auth: {
-      user: 'saket@gmail.com', // generated ethereal user
-      pass: 'tmsnemxsxlorymyc', // generated ethereal password
+      user: `${emailsender}`, // generated ethereal user
+      pass: 'uhzindnlvtxampmz', // generated ethereal password
     },
   });
 
@@ -37,7 +38,7 @@ module.exports.sendMail = async function sendMail(str, data){
   // send mail with defined transport object
   console.log("======Line 36=============");
   let info = await transporter.sendMail({
-    from: '"FoodApp 👻" saket@gmail.com', // sender address
+    from: `"FoodApp 👻" ${emailsender}`, // sender address
     to: data.email, // list of receivers
     subject: Osubject, // Subject line
     // text: Otext, // plain text body

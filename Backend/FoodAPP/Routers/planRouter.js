@@ -27,16 +27,14 @@ planRouter
 planRouter.use(isAuthorised(["admin", "restaurantowner"]));
 
 planRouter
-.route("/createPlan")
+.route("/crud")
 .post(createPlan)
 
  planRouter
-.route("/deletePlan/:id")   
-.delete(deletePlan)
-
-planRouter
-.route("/updatePlan/:id")   
+.route("/crud/:id")   
 .patch(updatePlan)
+.delete(deletePlan)  
+
 
 
 

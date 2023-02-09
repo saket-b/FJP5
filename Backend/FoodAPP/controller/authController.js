@@ -12,7 +12,8 @@ module.exports.signup = async function signup(req, res){
     try{
         let dataobj = req.body;
         let user    = await usermodel.create(dataobj);
-       sendMail("signup", user);
+        // for sending welcome message for sign up
+        //sendMail("signup", user);
         if( user)
         {
             res.json({
@@ -183,7 +184,7 @@ module.exports.forgetpassword = async function forgetpassword(req, res){
     {
                 console.log("forget password ", user);
 
-               let resetToken = user.createResetToken();
+               let resetToken = await user.createResetToken();
                
                // reset link banana hai
                console.log("reset Token = ", resetToken);
@@ -196,7 +197,7 @@ module.exports.forgetpassword = async function forgetpassword(req, res){
                     resetpasswordLink : resetpasswordLink,
                     email :email
                 }
-                sendMail("resetpassword", obj);
+                await sendMail("resetpassword", obj);
         }
         else 
         {
