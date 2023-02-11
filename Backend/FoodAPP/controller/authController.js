@@ -189,8 +189,9 @@ module.exports.forgetpassword = async function forgetpassword(req, res){
                // reset link banana hai
                console.log("reset Token = ", resetToken);
                // http://dk.com/resetpassword/resetToken
-               let resetpasswordLink = `${req.protocol}://${req.get('host')}/resetpassword/${resetToken}}`; 
-                // send to email
+               let resetpasswordLink = `${req.protocol}://${req.get('host')}/user/resetpassword/${resetToken}`; 
+               console.log(resetpasswordLink);
+               // send to email
                 // jo abhi baki hai
                 // usinf nodeemailer
                 let obj ={
@@ -198,6 +199,9 @@ module.exports.forgetpassword = async function forgetpassword(req, res){
                     email :email
                 }
                 await sendMail("resetpassword", obj);
+                res.json({
+                    message:"message sent successfully"
+                })
         }
         else 
         {
@@ -222,11 +226,16 @@ module.exports.forgetpassword = async function forgetpassword(req, res){
 module.exports.resetpassword = async function resetpassword(req, res){
 
     try{
+        console.log("inside resetpassword function");
         let {password, confirmPassword} = req.body;
+        console.log(password);
+        console.log(confirmPassword);
         const token = req.params.token;
+        console.log(token);
         let user = await usermodel.findOne({resetToken: token});
         if( user)
         {
+            console.log("user = ", user);
             user.resetpasswordHandler(password, confirmPassword);
             await user.save();
             res.json({

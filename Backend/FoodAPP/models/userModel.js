@@ -3,7 +3,7 @@ const emailValidator = require("email-validator");
 const brypt = require("bcrypt");
 const crypto = require("crypto");
 const db_link = "mongodb+srv://admin:oYw1mXQZEsOjodft@cluster0.f1mfevb.mongodb.net/?retryWrites=true&w=majority"
-
+const { v4: uuidv4 } = require("uuid");
 mongoose.connect(db_link)
 .then( function(db){
 
@@ -41,7 +41,7 @@ const userschema = new mongoose.Schema({
         type : String,
         required:true,
         validate : function(){
-            return this.password == this.confirmpassword;
+            return this.confirmpassword == this.password;
         }
     },
     role :{
@@ -53,15 +53,26 @@ const userschema = new mongoose.Schema({
         type:String,
         default:'img/users/default.jpeg'
     },
-    resetToken : String
+    resetToken : {type : String}
 
 });
 
-userschema.method.createResetToken = function(){
+userschema.pre("save", function(){
 
-    const resetTokenNew = crypto.randomBytes(32).toString("hex");
+    console.log("pre saving data", this);
+    this.confirmpassword = undefined
+});
 
+
+userschema.methods.createResetToken = async function(){
+    console.log("inside dreate Reset Function");
+
+    //const resetTokenNew = crypto.randomBytes(32).toString("hex");
+    const resetTokenNew = uuidv4();
+    console.log("Reset Token = ",resetTokenNew );
     this.resetToken = resetTokenNew;
+  //  this.confirmPassword = this.password;
+    await this.save();
     return resetTokenNew;
 
 }
@@ -76,11 +87,6 @@ userschema.methods.resetpasswordHandler = function (password, confirmPassword){
 
 
 
-userschema.pre("save", function(){
-
-    console.log("pre saving data", this);
-    this.confirmpassword = undefined
-});
 
 // userschema.pre("save", async function(){
 

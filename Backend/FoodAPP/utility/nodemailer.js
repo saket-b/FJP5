@@ -29,6 +29,8 @@ module.exports.sendMail = async function sendMail(str, data){
     Ohtml= `<h1>Welcome To Food App</h1> Name - ${data.name} Email- ${data.email}`;
   }
   else {
+    console.log("=====inside reset condition email : ======== ", data.email);
+    
     Osubject = "Reset Password";
     Ohtml =`<h1>FoodApp.com</h1> 
     Here is your link for reset password
